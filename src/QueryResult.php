@@ -10,7 +10,7 @@ class QueryResult
 
     public function __construct($result)
     {
-        if (method_exists($result, 'getResultSets'))
+        if (is_object($result) && method_exists($result, 'getResultSets'))
         {
             $sets = $result->getResultSets();
 
@@ -23,7 +23,7 @@ class QueryResult
                 $this->truncated = $data['truncated'] ?? false;
             }
         }
-        else if (method_exists($result, 'getResultSet'))
+        else if (is_object($result) && method_exists($result, 'getResultSet'))
         {
             $set = $result->getResultSet();
 
